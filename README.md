@@ -118,7 +118,33 @@ Organize the code and docs clearly for GitHub display:
 └── docs/                  # Optional documentation
 ```
 
-## 9. 7-Day Implementation Timeline
+## 9. Day 2 MVP Command Flow
+
+Day 2 is now wired as a runnable pipeline in `src/day2_data.py`:
+
+```bash
+# Run full Day 2 flow: ingest -> clean -> merge/split -> report
+python -m src.day2_data run --max-samples-per-source 5000 --valid-ratio 0.05 --seed 42
+
+# Optional staged runs
+python -m src.day2_data ingest --max-samples-per-source 5000
+python -m src.day2_data process --valid-ratio 0.05 --seed 42
+
+# Offline/local validation run (no downloads)
+python -m src.day2_data smoke --valid-ratio 0.05 --seed 42
+```
+
+Expected artifacts:
+
+- `data/raw/dataset_manifest.json` (source metadata: source/license/language/split/sample_size)
+- `data/raw/<source_id>/raw.txt` (raw text lines per source)
+- `data/processed/intermediate/<source_id>.txt` (cleaned text per source)
+- `data/processed/merged_corpus.txt` (all cleaned sources merged)
+- `data/processed/train.txt` and `data/processed/valid.txt` (deterministic split)
+- `data/processed/sample_100k_lines.txt` (smoke-test sample)
+- `docs/day2_data_report.md` (quality report: counts, approx tokens, source mix, duplicate checks)
+
+## 10. 7-Day Implementation Timeline
 
 - **Day 1 – Setup & Architecture Design:** Set up Colab, environment, GitHub repo. Decide model hyperparameters and basic architecture. Implement a model class template.
 - **Day 2 – Data Collection:** Download selected datasets. Write scripts to clean and merge text. Prepare a small sample dataset to test tokenization.
