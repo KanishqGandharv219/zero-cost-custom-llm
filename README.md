@@ -1,4 +1,4 @@
-# Building a Zero-Cost Custom LLM in 7 Days
+# Building a Zero-Cost Custom LLM
 
 This guide walks through designing and training an original (not fine-tuned) language model using only free tools (Google Colab, open libraries) and open datasets. We focus on an efficient "small" LLM architecture (e.g., a tiny GPT-like model) that can be trained within Colab's free-tier constraints and use primarily Indian-language data to position it as an "Indian-made" model. 
 
